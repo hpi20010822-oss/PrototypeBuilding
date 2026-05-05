@@ -103,7 +103,6 @@ h1.title {
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    margin-left: -10px;
     margin-bottom: 24px;
     border: 1px solid #f0f0f0;
 }
@@ -112,7 +111,6 @@ h1.title {
     color: #c44a41;
     font-size: 15px;
     font-weight: bold;
-    margin-top: -20px;
     margin-bottom: 16px;
     line-height: 1.4;
 }
@@ -127,7 +125,6 @@ h1.title {
     list-style: none;
     margin-bottom: 16px;
     font-weight: 600;
-    margin-left: 8px;
 }
 
 .info-list li {
@@ -278,7 +275,6 @@ h1.title {
     padding: 10px 14px;
     border-radius: 12px 12px 0 12px;
     font-size: 12px;
-    font-weight: 600;
     color: #1a4f57;
     max-width: 200px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
