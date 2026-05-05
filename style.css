@@ -124,7 +124,7 @@ h1.title {
 .info-list {
     list-style: none;
     margin-bottom: 16px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .info-list li {
@@ -263,7 +263,7 @@ h1.title {
        1. 當螢幕大於 414px (電腦版) 時，讓按鈕固定在 414px 容器內的右側 20px 處。
        2. 當螢幕小於 414px (手機版) 時，讓按鈕固定在距離螢幕右側 20px 處。 */
     right: max(20px, calc(50% - 207px + 20px)); 
-    
+    font-weight: 500;
     display: flex;
     align-items: flex-end;
     gap: 10px;
@@ -306,4 +306,105 @@ h1.title {
     font-size: 24px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     cursor: pointer;
+}
+
+/* =========================================
+   滑動客服視窗 (Bottom Sheet) 樣式
+   ========================================= */
+
+/* 半透明背景遮罩 */
+.chat-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 黑色半透明 */
+    z-index: 1000;
+    
+    /* 動畫設定：預設隱藏 */
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s;
+}
+
+/* 遮罩啟動狀態 */
+.chat-overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* 滑動視窗本體 */
+.chat-modal {
+    position: fixed;
+    bottom: 0;
+    left: 50%; /* 讓它在整個螢幕置中 */
+    
+    /* 預設位置：往下平移 100% 藏在畫面外 */
+    transform: translateX(-50%) translateY(100%);
+    
+    width: 100%;
+    max-width: 414px; /* 與 app-container 寬度保持一致 */
+    height: 85vh; /* 視窗高度佔螢幕的 85% */
+    background-color: #ffffff;
+    border-radius: 20px 20px 0 0; /* 只有上方有圓角 */
+    z-index: 1001; /* 必須比遮罩高 */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    
+    /* 滑動動畫 */
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 視窗啟動狀態 (滑上來) */
+.chat-modal.active {
+    transform: translateX(-50%) translateY(0);
+}
+
+/* 自訂視窗頭部 (返回鍵與標題) */
+.chat-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #eeeeee; /* 底部分隔線 */
+}
+
+/* 返回按鈕 `<` */
+.chat-close-btn {
+    background: none;
+    border: none;
+    font-size: 32px;
+    color: #333;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 10px 0 0;
+}
+
+/* 標題文字 */
+.chat-modal-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* 讓 iframe 佔滿剩餘空間 */
+/* 讓 iframe 佔滿剩餘空間，並透過位移隱藏 Chatbase 預設的標題列 */
+.chat-modal-body {
+    flex: 1;
+    width: 100%;
+    background-color: #ffffff; /* 配合 Chatbase 背景改為白色 */
+    overflow: hidden; /* 關鍵：將超出這個區塊的內容（被往上推的藍色標題）隱藏起來 */
+}
+
+/* 針對內嵌 iframe 的特殊處理 */
+.chat-modal-body iframe {
+    width: 100%;
+    /* 將高度增加，補償被往上移的空間，避免底部被切掉 */
+    height: calc(100% + 65px); 
+    /* 關鍵：將整個 iframe 往上提 65px，把藍色標題藏到 .chat-modal-body 外部 */
+    margin-top: -65px; 
+    border: none;
 }

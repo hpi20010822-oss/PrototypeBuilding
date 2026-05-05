@@ -95,6 +95,57 @@
         <div class="chat-icon">🤖</div>
     </div>
 </div>
+<!-- 聊天室半透明遮罩 -->
+    <div class="chat-overlay" id="chatOverlay"></div>
+    
+    <!-- 由底部滑出的聊天視窗 -->
+    <div class="chat-modal" id="chatModal">
+        <div class="chat-modal-header">
+            <button class="chat-close-btn" id="chatCloseBtn">‹</button>
+            <div class="chat-modal-title">🤖 智能客服</div>
+            <!-- 右側佔位符，用來讓標題完美置中 -->
+            <div style="width: 24px;"></div> 
+        </div>
+        
+        <div class="chat-modal-body">
+            <!-- 使用 Iframe 嵌入您的 Chatbase 機器人 -->
+            <iframe
+                src="https://www.chatbase.co/chatbot-iframe/5AmCKbZPOrl53DfZSJFYk"
+                width="100%"
+                height="100%"
+                frameborder="0"
+            ></iframe>
+        </div>
+    </div>
+
+    <!-- 控制開關的 JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 取得頁面元素
+            const chatIcon = document.querySelector('.chat-icon');
+            const chatOverlay = document.getElementById('chatOverlay');
+            const chatModal = document.getElementById('chatModal');
+            const chatCloseBtn = document.getElementById('chatCloseBtn');
+
+            // 點擊原有的機器人圖示：打開遮罩與滑動視窗
+            chatIcon.addEventListener('click', function() {
+                chatOverlay.classList.add('active');
+                chatModal.classList.add('active');
+            });
+
+            // 點擊返回按鈕：關閉視窗
+            chatCloseBtn.addEventListener('click', function() {
+                chatOverlay.classList.remove('active');
+                chatModal.classList.remove('active');
+            });
+
+            // 點擊半透明背景：也可以關閉視窗
+            chatOverlay.addEventListener('click', function() {
+                chatOverlay.classList.remove('active');
+                chatModal.classList.remove('active');
+            });
+        });
+    </script>
 
 </body>
 </html>
